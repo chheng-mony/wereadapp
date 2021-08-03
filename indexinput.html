@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Bostrap script-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+
+    <title>Index input</title>
+    <style>
+        .inputerr {
+            display: none;
+        }
+        #smsSuccess{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <br>
+        <div class="card">
+            <h5 class="card-header">Input New Book</h5>
+            <div class="card-body">
+                <div class="row g-1">
+                    <div class="col-sm-1">
+                        <label for="">ID</label>
+                        <input type="text" placeholder="Id" id="bookidBox" class="form-control form-control-sm"
+                            value="1">
+                        <label for="lberr" class="text-danger inputerr" id="errId"><small>Enter id*</small></label>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="">Book Title</label>
+                        <input type="text" placeholder="Title" class="form-control form-control-sm" id="titleBox">
+                        <label for="lberr" class="text-danger inputerr" id="errTitle"><small>Enter book
+                                title*</small></label>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="">Select Book Category</label>
+                        <select id="categoryBox" class="form-control form-control-sm">
+                            <option selected value="0">Choose...</option>
+                            <option value="001">ព័ត៌មានវិទ្យា | Information Technology</option>
+                            <option value="002">ប្រវត្តិសាស្រ្ត | History</option>
+                            <option value="003">ច្បាប់ | Law</option>
+                            <option value="004">រឿងនិទាន | Tales</option>
+                            <option value="005">ប្រឡោមលោក | Novel</option>
+                            <option value="006">សៀវភៅធម៌ | Dharma Book</option>
+                            <option value="007">កសិកម្ម​ និងបច្ចេកទេស | Agriculture and Technology </option>
+                            <option value="008">សំណងស៊ីវិល | Civil Compensation</option>
+                            <option value="009">សណួរ និងចំលើយ | Questions and Answers</option>
+                            <option value="010">ទស្សនវិជ្ជា | Philosophy</option>
+                            <option value="011">ឯកសាសម្រាបគ្រូបង្រៀន | Documents for teachers</option>
+                        </select>
+                        <label for="lberr" class="text-danger inputerr" id="errCategory"><small>Enter book
+                                category*</small></label>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="">Auther</label>
+                        <input type="text" placeholder="Auther" class="form-control form-control-sm" id="autherBox">
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="">Post Date</label>
+                        <input type="date" class="form-control form-control-sm" id="postdateBox">
+                        <label for="lberr" class="text-danger inputerr" id="errPostdate"><small>Enter post
+                                date*</small></label>
+                    </div>
+                </div>
+                <div class="row g-1">
+                    <div class="col-sm-7">
+                        <label for="">Book Description</label>
+                        <textarea rows="7" placeholder="Description" class="form-control form-control-sm"
+                            id="descriptionBox"></textarea>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="col-12 form-label">Book Cover</label>
+                                <div class="col-12">
+                                    <img style="width: 80px; height: 110px;" class="img-thumbnail align-middle"
+                                        id="bookcoverImg">
+                                    <label id="UpProgresscover" class="align-bottom"></label>
+                                    <label for="lberr" class="align-bottom text-danger inputerr"
+                                        id="errCover"><small>Enter cover*</small></label>
+                                </div>
+                                <button class="col-12 btn btn-primary btn-sm" id="selectcover">Choose...</button>
+                            </div>
+                            <div class="col-6">
+                                <label class="col-12 form-label">Book PDF File</label>
+                                <div class="col-12">
+                                    <img style="width: 80px; height: 110px;" class="img-thumbnail" id="bookcoverPDF">
+                                    <label for="lberr" class="align-bottom text-danger inputerr"
+                                        id="errPdf"><small>Enter PDF file*</small></label>
+                                    <label id="UpProgresspdf" class="align-bottom"></label>
+                                </div>
+                                <button class="col-12 btn btn-primary btn-sm" id="selectpdf">Choose...</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row g-1 alert alert-success" id="smsSuccess">
+                    <div class="col-11">
+                        Successfully.
+                    </div>
+                    <div class="col-1">
+                        <button id="btnSMSSuccessfull" class="btn btn-outline-danger btn-sm" style="float: right;">X</button>
+                    </div>
+                </div>
+                <div class="row g-1">
+                    <div class="col-md-2"><button class="form-control btn btn-primary">Add New</button></div>
+                    <div id="insert" class="col-md-2"><button class="form-control btn btn-success">Save</button>
+                    </div>
+                    <div class="col-md-1"><button class="form-control btn btn-info">Select</button></div>
+                    <div class="col-md-1"><button class="form-control btn btn-warning">Update</button></div>
+                    <div class="col-md-1"><button class="form-control btn btn-danger">Delete</button></div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!--configeration-->
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-storage.js"></script>
+
+    <script id="Validation">
+
+        document.getElementById('btnSMSSuccessfull').onclick = function () {
+            document.getElementById('smsSuccess').style.display = 'none';
+        }
+
+    </script>
+
+    <script id="MainScript">
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyDDKBJiT2gb1KoYJc4ulQ1ITtSiH1HDn5g",
+            authDomain: "weread-15fb4.firebaseapp.com",
+            databaseURL: "https://weread-15fb4-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "weread-15fb4",
+            storageBucket: "weread-15fb4.appspot.com",
+            messagingSenderId: "952213565908",
+            appId: "1:952213565908:web:1bd3f9305f525b43112641",
+            measurementId: "G-CQY5HT5663"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        //firebase.analytics();
+
+        var Id;
+        var Title;
+        var CategoryId;
+        var CategoryName;
+        var Auther;
+        var PostDate;
+        var Description;
+        var CoverUrl;
+        var PdfUrl;
+        var Coverfiles = [];
+        var PdfFiles = [];
+        var reader;
+
+        //Load data time post date
+        function postDatafunction() {
+            var date = new Date();
+            var currentDate = date.toISOString().substring(0, 10);
+            document.getElementById('postdateBox').value = currentDate;
+        }
+        window.onload = postDatafunction();
+        //Select Image Cover;
+        document.getElementById("selectcover").onclick = function (e) {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.onchange = e => {
+                Coverfiles = e.target.files;
+                reader = new FileReader();
+                reader.onload = function () {
+                    document.getElementById("bookcoverImg").src = reader.result;
+                }
+                reader.readAsDataURL(Coverfiles[0]);
+            }
+            input.click();
+        }
+
+        //Select Book PDF;
+        document.getElementById("selectpdf").onclick = function (e) {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.onchange = e => {
+                PdfFiles = e.target.files;
+                reader = new FileReader();
+                reader.onload = function () {
+                    document.getElementById("bookcoverPDF").src = reader.result;
+                }
+                reader.readAsDataURL(PdfFiles[0]);
+            }
+            input.click();
+        }
+
+        //Upload
+        document.getElementById('insert').onclick = function () {
+
+            Id = document.getElementById('bookidBox').value;
+            Title = document.getElementById('titleBox').value;
+
+            //Category values;
+            CategoryId = document.getElementById('categoryBox').value;
+            if (CategoryId == '0') {
+                CategoryName = "Null";
+            }
+            else if (CategoryId == '001') {
+                CategoryName = "ព័ត៌មានវិទ្យា | Information Technology";
+            }
+            else if (CategoryId == '002') {
+                CategoryName = "ប្រវត្តិសាស្រ្ត | History";
+            }
+            else if (CategoryId == '003') {
+                CategoryName = "ច្បាប់ | Law";
+            }
+            else if (CategoryId == '004') {
+                CategoryName = "រឿងនិទាន | Tales";
+            }
+            else if (CategoryId == '005') {
+                CategoryName = "ប្រឡោមលោក | Novel";
+            }
+            else if (CategoryId == '006') {
+                CategoryName = "សៀវភៅធម៌ | Dharma Book";
+            }
+            else if (CategoryId == '007') {
+                CategoryName = "កសិកម្ម​ និងបច្ចេកទេស | Agriculture and Technology";
+            }
+            else if (CategoryId == '008') {
+                CategoryName = "សំណងស៊ីវិល | Civil Compensation";
+            }
+            else if (CategoryId == '009') {
+                CategoryName = "សណួរ និងចំលើយ | Questions and Answers";
+            }
+            else if (CategoryId == '010') {
+                CategoryName = "ទស្សនវិជ្ជា | Philosophy";
+            }
+            else if (CategoryId == '011') {
+                CategoryName = "ឯកសាសម្រាបគ្រូបង្រៀន | Documents for teachers";
+            }
+            //alert("Select category is : " + CategoryId + CategoryName);
+            //return;
+
+            Auther = document.getElementById('autherBox').value;
+            PostDate = document.getElementById('postdateBox').value;
+            Description = document.getElementById('descriptionBox').value;
+
+            if (Id == "") {
+                document.getElementById('errId').style.display = 'flex';
+            } else if (Title == "") {
+                document.getElementById('errId').style.display = 'none';
+                document.getElementById('errTitle').style.display = 'flex';
+            } else if (CategoryId == "0") {
+                document.getElementById('errId').style.display = 'none';
+                document.getElementById('errTitle').style.display = 'none';
+                document.getElementById('errCategory').style.display = 'flex';
+            } else if (PostDate == "") {
+                document.getElementById('errId').style.display = 'none';
+                document.getElementById('errTitle').style.display = 'none';
+                document.getElementById('errCategory').style.display = 'none';
+                document.getElementById('errPostdate').style.display = 'flex';
+            } else if (Coverfiles == "") {
+                document.getElementById('errId').style.display = 'none';
+                document.getElementById('errTitle').style.display = 'none';
+                document.getElementById('errCategory').style.display = 'none';
+                document.getElementById('errPostdate').style.display = 'none';
+                document.getElementById('errCover').style.display = 'flex';
+            } else if (PdfFiles == "") {
+                document.getElementById('errId').style.display = 'none';
+                document.getElementById('errTitle').style.display = 'none';
+                document.getElementById('errCategory').style.display = 'none';
+                document.getElementById('errPostdate').style.display = 'none';
+                document.getElementById('errCover').style.display = 'none';
+                document.getElementById('errPdf').style.display = 'flex';
+                return;
+            }
+            else {
+                document.getElementById('errId').style.display = 'none';
+                document.getElementById('errTitle').style.display = 'none';
+                document.getElementById('errCategory').style.display = 'none';
+                document.getElementById('errPostdate').style.display = 'none';
+                document.getElementById('errCover').style.display = 'none';
+                document.getElementById('errPdf').style.display = 'none';
+                document.getElementById('smsSuccess').style.display = 'none';
+
+                var uploadTaskcover = firebase.storage().ref('book_img/' + Id + '-' + Title + '-' + PostDate).put(Coverfiles[0]);
+                var uploadTaskpdf = firebase.storage().ref('book_pdf/' + Id + '-' + Title + '-' + PostDate).put(PdfFiles[0]);
+
+                uploadTaskcover.on('state_changed', function (snapshot) {
+                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    document.getElementById('UpProgresscover').innerHTML = 'Upload' + progress + '%';
+                },
+                    uploadTaskpdf.on('state_changed', function (snapshot) {
+                        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        document.getElementById('UpProgresspdf').innerHTML = 'Upload' + progress + '%';
+                    },
+                        function (error) {
+                            alert("Error");
+                        },
+                        function () {
+                            uploadTaskcover.snapshot.ref.getDownloadURL().then(function (url) {
+                                CoverUrl = url;
+                                uploadTaskpdf.snapshot.ref.getDownloadURL().then(function (url) {
+                                    PdfUrl = url;
+                                    firebase.database().ref('book/' + Id).set({
+                                        id: Id,
+                                        title: Title,
+                                        categoriesid: CategoryId,
+                                        categories: CategoryName,
+                                        author: Auther,
+                                        postdate: PostDate,
+                                        description: Description,
+                                        imagecover: CoverUrl,
+                                        pdfurl: PdfUrl
+                                    });
+                                    document.getElementById('smsSuccess').style.display = 'flex';
+                                    //alert("Successfully.");
+                                    getBookid();
+                                })
+                            })
+                        }));
+            }
+        }
+
+        function getBookid() {
+            firebase.database().ref('book').limitToLast(1).once('value')
+                .then(function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        var lastrecord = childSnapshot.val().id;
+                        var autoid = ++lastrecord;
+                        document.getElementById('bookidBox').value = autoid;
+                    });
+                });
+        }
+
+        window.onload = getBookid();
+    </script>
+
+</body>
+
+</html>
