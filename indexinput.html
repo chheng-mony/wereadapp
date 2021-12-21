@@ -28,7 +28,8 @@
         .inputerr {
             display: none;
         }
-        #smsSuccess{
+
+        #smsSuccess {
             display: none;
         }
     </style>
@@ -57,17 +58,6 @@
                         <label for="">Select Book Category</label>
                         <select id="categoryBox" class="form-control form-control-sm">
                             <option selected value="0">Choose...</option>
-                            <option value="001">ព័ត៌មានវិទ្យា | Information Technology</option>
-                            <option value="002">ប្រវត្តិសាស្រ្ត | History</option>
-                            <option value="003">ច្បាប់ | Law</option>
-                            <option value="004">រឿងនិទាន | Tales</option>
-                            <option value="005">ប្រឡោមលោក | Novel</option>
-                            <option value="006">សៀវភៅធម៌ | Dharma Book</option>
-                            <option value="007">កសិកម្ម​ និងបច្ចេកទេស | Agriculture and Technology </option>
-                            <option value="008">សំណងស៊ីវិល | Civil Compensation</option>
-                            <option value="009">សណួរ និងចំលើយ | Questions and Answers</option>
-                            <option value="010">ទស្សនវិជ្ជា | Philosophy</option>
-                            <option value="011">ឯកសាសម្រាបគ្រូបង្រៀន | Documents for teachers</option>
                         </select>
                         <label for="lberr" class="text-danger inputerr" id="errCategory"><small>Enter book
                                 category*</small></label>
@@ -121,7 +111,8 @@
                         Successfully.
                     </div>
                     <div class="col-1">
-                        <button id="btnSMSSuccessfull" class="btn btn-outline-danger btn-sm" style="float: right;">X</button>
+                        <button id="btnSMSSuccessfull" class="btn btn-outline-danger btn-sm"
+                            style="float: right;">X</button>
                     </div>
                 </div>
                 <div class="row g-1">
@@ -168,11 +159,11 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         //firebase.analytics();
-
+        
         var Id;
         var Title;
-        var CategoryId;
-        var CategoryName;
+        var Category_id;
+        var Category_title;
         var Auther;
         var PostDate;
         var Description;
@@ -219,50 +210,43 @@
             input.click();
         }
 
+        //List data from fierbase to select selectCategory
+        function selectCategory() {
+            firebase.database().ref('categories').once('value', function (AllRecord) {
+                AllRecord.forEach(
+                    function (CurrentRecord) {
+                        var id = CurrentRecord.val().categoryid;
+                        var title = CurrentRecord.val().categoryname;
+                        AddItemToSelectCategory(id, title);
+                    }
+                );
+            });
+        }
+
+        window.onload = selectCategory();
+        //Add Item to select iption selectCategory
+        function AddItemToSelectCategory(id, title) {
+            //getElement
+            var selectMain = document.getElementById('categoryBox');
+            //createElement
+            var opt = document.createElement('option');
+            opt.value = id;
+            opt.text = title;
+            selectMain.appendChild(opt);
+        }
+
+
         //Upload
         document.getElementById('insert').onclick = function () {
 
             Id = document.getElementById('bookidBox').value;
             Title = document.getElementById('titleBox').value;
 
-            //Category values;
-            CategoryId = document.getElementById('categoryBox').value;
-            if (CategoryId == '0') {
-                CategoryName = "Null";
-            }
-            else if (CategoryId == '001') {
-                CategoryName = "ព័ត៌មានវិទ្យា | Information Technology";
-            }
-            else if (CategoryId == '002') {
-                CategoryName = "ប្រវត្តិសាស្រ្ត | History";
-            }
-            else if (CategoryId == '003') {
-                CategoryName = "ច្បាប់ | Law";
-            }
-            else if (CategoryId == '004') {
-                CategoryName = "រឿងនិទាន | Tales";
-            }
-            else if (CategoryId == '005') {
-                CategoryName = "ប្រឡោមលោក | Novel";
-            }
-            else if (CategoryId == '006') {
-                CategoryName = "សៀវភៅធម៌ | Dharma Book";
-            }
-            else if (CategoryId == '007') {
-                CategoryName = "កសិកម្ម​ និងបច្ចេកទេស | Agriculture and Technology";
-            }
-            else if (CategoryId == '008') {
-                CategoryName = "សំណងស៊ីវិល | Civil Compensation";
-            }
-            else if (CategoryId == '009') {
-                CategoryName = "សណួរ និងចំលើយ | Questions and Answers";
-            }
-            else if (CategoryId == '010') {
-                CategoryName = "ទស្សនវិជ្ជា | Philosophy";
-            }
-            else if (CategoryId == '011') {
-                CategoryName = "ឯកសាសម្រាបគ្រូបង្រៀន | Documents for teachers";
-            }
+            //Select category option
+            var categorys = document.getElementById('categoryBox');
+            Category_id = categorys.options[categorys.selectedIndex].value;
+            Category_title = categorys.options[categorys.selectedIndex].text;
+
             //alert("Select category is : " + CategoryId + CategoryName);
             //return;
 
@@ -275,7 +259,7 @@
             } else if (Title == "") {
                 document.getElementById('errId').style.display = 'none';
                 document.getElementById('errTitle').style.display = 'flex';
-            } else if (CategoryId == "0") {
+            } else if (Category_id == "0") {
                 document.getElementById('errId').style.display = 'none';
                 document.getElementById('errTitle').style.display = 'none';
                 document.getElementById('errCategory').style.display = 'flex';
@@ -330,8 +314,8 @@
                                     firebase.database().ref('book/' + Id).set({
                                         id: Id,
                                         title: Title,
-                                        categoriesid: CategoryId,
-                                        categories: CategoryName,
+                                        categoriesid: Category_id,
+                                        categories: Category_title,
                                         author: Auther,
                                         postdate: PostDate,
                                         description: Description,
